@@ -22,3 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# file này có chức năng lưu các phần mà git không quản lý(không đẩy lên github)
