@@ -1,6 +1,6 @@
 
 // component = html + css + js
-const MyComponent = () => { // tên component phải viết hoa chữ cái đầu
+const MyComponent = () => {  // tên component phải viết hoa chữ cái đầu
   return (
     <div> First component ver 2.0 </div>
   );
