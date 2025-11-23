@@ -2,7 +2,7 @@ const TodoData = (props) => {
     // props là 1 biến object
 
 
-    const {name , age, data} = props; // sử dụng destructuring object
+    const {name , age, data, todoList} = props; // sử dụng destructuring object
 
     console.log(">>> check props: ", props);
     return (
@@ -10,6 +10,9 @@ const TodoData = (props) => {
             <div>My name is {name}</div>
             <div>Learning React</div>
             <div>Watching Youtube</div>
+            <div>
+                {JSON.stringify(props.todoList)}
+            </div>
         </div>
     )
 }
