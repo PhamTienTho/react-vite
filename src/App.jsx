@@ -11,11 +11,18 @@ const myData = {
   address: "Ha Noi"
 }
 
+const addNewTodo = (name) => {
+  alert(`call me ${name}`);
+}
+
 const App = () => {
   return (
     <div className="todo-container">
       <div className="todo-title">To do List</div>
-      <TodoNew />
+      <TodoNew 
+        // truyền function trừ cha sang con
+        addNewTodo = {addNewTodo} 
+      />
       <TodoData 
         name = {myName}
         age = {age}
