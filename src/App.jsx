@@ -40,15 +40,16 @@ const App = () => {
         // truyền function trừ cha sang con
         addNewTodo={addNewTodo}
       />
-      <TodoData
-        // name={myName}
-        // age={age}
-        // data={myData}
-        todoList={todoList}
-      />
-      <div className='todo-image'>
-        <img className='logo' src={logoReact} />
-      </div>
+      {todoList.length > 0 ?
+        <TodoData
+          todoList={todoList}
+        />
+        :
+        <div className='todo-image'>
+          <img className='logo' src={logoReact} />
+        </div>
+      }
+
     </div>
   )
 }
