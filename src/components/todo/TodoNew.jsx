@@ -9,18 +9,19 @@ const TodoNew = (props) => {
   const { addNewTodo } = props;
 
   const handleOnClick = () => {
-    addNewTodo(valueInput)
+    addNewTodo(valueInput);
+    setValueInput("");  // sau khi ấn click thì giá trị ô input được reset
   }
 
   const handleOnChange = (name) => {
     setValueInput(name);
-    console.log("checkpoint")
   }
 
   return (
     <div className="todo-new">
       <input type="text"
         onChange={(event) => handleOnChange(event.target.value)}
+        value={valueInput} // dùng để kiểm soát giá trị trong ô input
       ></input>
       <button
         style={{ cursor: "pointer" }}
