@@ -28,6 +28,12 @@ const App = () => {
     setTodoList([...todoList, newToDo]);
   }
 
+  const deleteTodo = (id) => {
+    const newTodo = todoList.filter(item => item.id !== id);
+    setTodoList(newTodo);
+    console.log(">>> check", todoList);
+  }
+
   const randomIntFromInterval = (min, max) => { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
@@ -37,12 +43,13 @@ const App = () => {
     <div className="todo-container">
       <div className="todo-title">To do List</div>
       <TodoNew
-        // truyền function trừ cha sang con
+        // truyền function trừ cha sang con 
         addNewTodo={addNewTodo}
       />
       {todoList.length > 0 ?
         <TodoData
-          todoList={todoList}
+          todoList = {todoList}
+          deleteTodo = {deleteTodo}
         />
         :
         <div className='todo-image'>
