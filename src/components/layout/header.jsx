@@ -1,13 +1,12 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './header.css'
 
 const Header = () => {
     return (
         <ul>
-            <li><Link class="active" to="/">Home</Link></li> 
-            <li><Link to="/users">Users</Link></li>
-            <li><Link to="/products">Products</Link></li>
-            <li><Link to="#about">About</Link></li>
+            <li><NavLink to="/">Home</NavLink></li> 
+            <li><NavLink to="/users">Users</NavLink></li>
+            <li><NavLink to="/products">Products</NavLink></li>
         </ul>
     )// sử dụng component Link từ thư viện react-router thay cho thẻ a giúp cho trang không bị reload khi điều hàng sang route khác
 }
