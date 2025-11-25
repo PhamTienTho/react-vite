@@ -1,14 +1,15 @@
+import { Link } from 'react-router-dom';
 import './header.css'
 
 const Header = () => {
     return (
         <ul>
-            <li><a class="active" href="/">Home</a></li>
-            <li><a href="/users">Users</a></li>
-            <li><a href="/products">Products</a></li>
-            <li><a href="#about">About</a></li>
+            <li><Link class="active" to="/">Home</Link></li> 
+            <li><Link to="/users">Users</Link></li>
+            <li><Link to="/products">Products</Link></li>
+            <li><Link to="#about">About</Link></li>
         </ul>
-    )
+    )// sử dụng component Link từ thư viện react-router thay cho thẻ a giúp cho trang không bị reload khi điều hàng sang route khác
 }
 
 export default Header;
