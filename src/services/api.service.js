@@ -1,0 +1,20 @@
+import axios from './axios.customize';
+
+const createUserAPI = (fullName, email, passWord, phone) => {
+    const URL_BACKEND = "/api/v1/user";
+    const data = {
+        fullName: fullName,
+        email: email,
+        password: passWord,
+        phone: phone
+    }
+    return axios.post(URL_BACKEND, data);
+}
+
+const updateUserAPI = () => {
+
+}
+
+export {
+    createUserAPI, updateUserAPI
+}
