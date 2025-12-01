@@ -3,7 +3,9 @@ import { useState } from "react";
 import axios from "axios";
 import { createUserAPI } from "../../services/api.service";
 
-const UserForm = () => {
+const UserForm = (props) => {
+
+    const {loadUser} = props;
 
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
@@ -19,14 +21,23 @@ const UserForm = () => {
                 message: "Create user",
                 description: "Tạo user thành công"
             });
-            setIsModalOpen(false);
+            resetAndClearModal();
+            await loadUser();
         }
         else {
             notification.error({
-                message: "Errot create user",
+                message: "Error create user",
                 description: JSON.stringify(res.message)
             })
         }
+    }
+
+    const resetAndClearModal = () => {
+        setIsModalOpen(false);
+        setFullName("");
+        setEmail("");
+        setPassWord("");
+        setPhone("");
     }
 
     return (
@@ -37,17 +48,16 @@ const UserForm = () => {
                 <h3>Tables Users</h3>
                 <Button
                     type="primary"
-                    onClick={ () => {setIsModalOpen(true)} }>Create User</Button>
+                    onClick={() => { setIsModalOpen(true) }}>Create User</Button>
             </div>
 
             <Modal
                 title="Create Table"
                 open={isModalOpen}
-                onOk={ () => {
+                onOk={() => {
                     handleSubmitBtn();
-                    // setIsModalOpen(false);
-                } }
-                onCancel={() => { setIsModalOpen(false) }}
+                }}
+                onCancel={() => { resetAndClearModal() }}
                 maskClosable={false}
                 okText={"CREATE"}
             >
@@ -55,19 +65,31 @@ const UserForm = () => {
                 <div style={{ display: "flex", gap: "15px", flexDirection: "column" }}>
                     <div>
                         <span>Full name</span>
-                        <Input onChange={(event) => { setFullName(event.target.value) }} />
+                        <Input
+                            value={fullName}
+                            onChange={(event) => { setFullName(event.target.value) }}
+                        />
                     </div>
                     <div>
                         <span>Email</span>
-                        <Input onChange={(event) => { setEmail(event.target.value) }} />
+                        <Input
+                            value={email}
+                            onChange={(event) => { setEmail(event.target.value) }}
+                        />
                     </div>
                     <div>
                         <span>Password</span>
-                        <Input.Password onChange={(event) => { setPassWord(event.target.value) }} />
+                        <Input.Password
+                            value={passWord}
+                            onChange={(event) => { setPassWord(event.target.value) }}
+                        />
                     </div>
                     <div>
                         <span>Phone Number</span>
-                        <Input onChange={(event) => { setPhone(event.target.value) }} />
+                        <Input
+                            value={phone}
+                            onChange={(event) => { setPhone(event.target.value) }}
+                        />
                     </div>
                 </div>
 
