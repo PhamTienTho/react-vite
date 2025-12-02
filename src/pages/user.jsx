@@ -16,7 +16,6 @@ const UserPage = () => {
         setDataUsers(res.data);
     }
 
-
     return (
         <div style={{ padding: "20px" }}>
             <UserForm
