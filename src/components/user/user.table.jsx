@@ -1,7 +1,8 @@
-import { Flex, Space, Table, Tag } from 'antd';
+import { Drawer, Flex, Space, Table, Tag } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import UpdateUserModal from './update.userModal';
 import { useState } from 'react';
+import ViewUserDetail from './view.user.detail';
 
 const UserTable = (props) => {
 
@@ -10,13 +11,24 @@ const UserTable = (props) => {
     const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
     const [dataUpdate, setDataUpdate] = useState(null);
 
+    const [isDetailOpen, setIsDetailOpen] = useState(false);
+    const [userDetail, setUserDetail] = useState(null)
+
     const columns = [
         {
             title: 'ID',
             dataIndex: '_id',
             render: (_, record) => {
                 return (
-                    <a href='#'>{record._id}</a>
+                    <div>
+                        <a
+                            onClick={() => {
+                                setIsDetailOpen(true);
+                                setUserDetail(record)
+                            }}>
+                            {record._id}
+                        </a>
+                    </div>
                 )
             }
         },
@@ -33,7 +45,7 @@ const UserTable = (props) => {
             render: (_, record) => (
                 <div style={{ display: "flex", gap: "20px" }}>
                     <EditOutlined
-                        onClick={() => { 
+                        onClick={() => {
                             setIsModalUpdateOpen(true);
                             setDataUpdate(record)
                         }}
@@ -43,30 +55,6 @@ const UserTable = (props) => {
             )
         },
     ];
-    // const data = [
-    //     {
-    //         key: '1',
-    //         name: 'John Brown',
-    //         age: 32,
-    //         address: 'New York No. 1 Lake Park',
-    //         tags: ['nice', 'developer'],
-    //     },
-    //     {
-    //         key: '2',
-    //         name: 'Jim Green',
-    //         age: 42,
-    //         address: 'London No. 1 Lake Park',
-    //         tags: ['loser'],
-    //     },
-    //     {
-    //         key: '3',
-    //         name: 'Joe Black',
-    //         age: 32,
-    //         address: 'Sydney No. 1 Lake Park',
-    //         tags: ['cool', 'teacher'],
-    //     },
-    // ];
-
 
     return (
         <>
@@ -75,12 +63,18 @@ const UserTable = (props) => {
                 dataSource={dataUsers}
                 rowKey={'_id'}
             />
-            <UpdateUserModal 
+            <UpdateUserModal
                 isModalUpdateOpen={isModalUpdateOpen}
                 setIsModalUpdateOpen={setIsModalUpdateOpen}
                 dataUpdate={dataUpdate}
                 setDataUpdate={setDataUpdate}
                 loadUser={loadUser}
+            />
+            <ViewUserDetail
+                isDetailOpen={isDetailOpen}
+                setIsDetailOpen={setIsDetailOpen}
+                userDetail={userDetail}
+                setUserDetail={setUserDetail}
             />
         </>
     );
