@@ -1,13 +1,11 @@
 import { DeleteOutlined } from "@ant-design/icons";
-import { message, notification, Popconfirm } from "antd";
+import { notification, Popconfirm } from "antd";
 import { deleteUserAPI } from "../../services/api.service";
 
 
 const DeleteUserConfirm = (props) => {
 
     const { id, loadUser } = props;
-
-    const [messageApi, holder] = message.useMessage();
 
     const confirmDelete = async () => {
         const res = await deleteUserAPI(id);
@@ -31,7 +29,6 @@ const DeleteUserConfirm = (props) => {
 
     return (
         <>
-            {holder}
             <Popconfirm
                 title="Xóa người dùng"
                 description="Bạn có chắc chắn muốn xóa người dùng này?"
