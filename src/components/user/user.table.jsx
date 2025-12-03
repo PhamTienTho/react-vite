@@ -1,8 +1,9 @@
-import { Drawer, Flex, Space, Table, Tag } from 'antd';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Table } from 'antd';
+import { EditOutlined } from '@ant-design/icons';
 import UpdateUserModal from './update.userModal';
 import { useState } from 'react';
 import ViewUserDetail from './view.user.detail';
+import DeleteUserConfirm from './user.deleteConfirm';
 
 const UserTable = (props) => {
 
@@ -50,7 +51,11 @@ const UserTable = (props) => {
                             setDataUpdate(record)
                         }}
                         style={{ cursor: "pointer", color: "orange" }} />
-                    <DeleteOutlined style={{ cursor: "pointer", color: "red" }} />
+
+                    <DeleteUserConfirm
+                        id={record._id}
+                        loadUser={loadUser}
+                    />
                 </div>
             )
         },
