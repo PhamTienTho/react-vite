@@ -38,7 +38,7 @@ const ViewUserDetail = (props) => {
         if (file) {
             setSelectedFile(file);
             setPreview(URL.createObjectURL(file));
-            event.target.value = ''
+            event.target.value = '';
         }
 
     }
