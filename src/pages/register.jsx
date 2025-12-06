@@ -1,6 +1,57 @@
+import { Button, Input, Form } from "antd"
+
 const RegisterPage = () => {
+
+    const [form] = Form.useForm();
+
+    const onFinish = (value) => {
+        console.log("check >>>", value)
+    }
+
     return (
-        <div>Register page</div>
+        <Form
+            layout="vertical"
+            form={form}
+            onFinish={onFinish}
+        // onFinishFailed={onFinishFailed}
+        >
+            <div style={{ margin: "50px" }}>
+                <Form.Item
+                    label="Username"
+                    name="username"
+                // rules={[{ required: true, message: 'Please input your username!' }]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    label="Email"
+                    name="email"
+                // rules={[{ required: true, message: 'Please input your username!' }]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    label="Password"
+                    name="password"
+                // rules={[{ required: true, message: 'Please input your username!' }]}
+                >
+                    <Input.Password />
+                </Form.Item>
+                <Form.Item
+                    label="Phone number"
+                    name="phone"
+                // rules={[{ required: true, message: 'Please input your username!' }]}
+                >
+                    <Input />
+                </Form.Item>
+                <div>
+                    <Button 
+                    // onClick={() => { form.submit() }} 
+                    htmlType="submit"
+                    type="primary">Register</Button>
+                </div>
+            </div>
+        </Form>
     )
 }
 
