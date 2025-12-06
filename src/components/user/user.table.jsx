@@ -4,10 +4,11 @@ import UpdateUserModal from './update.userModal';
 import { useState } from 'react';
 import ViewUserDetail from './view.user.detail';
 import DeleteUserConfirm from './user.deleteConfirm';
+import { AppConfigContext } from 'antd/es/app/context';
 
 const UserTable = (props) => {
 
-    const { dataUsers, loadUser } = props;
+    const { dataUsers, loadUser, current, pageSize, total, setCurrent, setPageSize, setTotal } = props;
 
     const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
     const [dataUpdate, setDataUpdate] = useState(null);
@@ -19,8 +20,8 @@ const UserTable = (props) => {
         {
             title: 'STT',
             render: (_, record, index) => {
-                return(
-                    <>{index + 1}</>
+                return (
+                    <>{(current - 1) * pageSize + index + 1}</>
                 )
             }
         },
@@ -69,12 +70,34 @@ const UserTable = (props) => {
         },
     ];
 
+    const onChange = (pagination, filters, sorter, extra) => {
+        if (pagination && pagination.current) {
+            if (+pagination.current !== +current) {
+                setCurrent(+pagination.current)
+            }
+        }
+        if (pagination && pagination.pageSize) {
+            if (+pagination.pageSize !== +pageSize) {
+                setPageSize(+pagination.pageSize)
+            }
+        }
+    }
+
     return (
         <>
             <Table
                 columns={columns}
                 dataSource={dataUsers}
                 rowKey={'_id'}
+                pagination={
+                    {
+                        current: current,
+                        pageSize: pageSize,
+                        showSizeChanger: true,
+                        total: total,
+                        showTotal: (total, range) => { return (<div> {range[0]}-{range[1]} trên {total} rows</div>) }
+                    }}
+                onChange={onChange}
             />
             <UpdateUserModal
                 isModalUpdateOpen={isModalUpdateOpen}
