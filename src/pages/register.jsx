@@ -1,6 +1,6 @@
-import { Button, Input, Form, notification, Row, Col } from "antd"
+import { Button, Input, Form, notification, Row, Col, Divider } from "antd"
 import { registerUserAPI } from "../services/api.service";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
 
@@ -36,15 +36,21 @@ const RegisterPage = () => {
     }
 
     return (
+        
         <Form
             layout="vertical"
             form={form}
             onFinish={onFinish}
-            style={{ margin: "20px" }}
+            style={{ margin: "10px" }}
         // onFinishFailed={onFinishFailed}
         >
             <Row justify={"center"}>
-                <Col xm={24} md={8}>
+                <Col xs={24} md={8}>
+                    <h3 style={{textAlign: "center", margin: "20px", fontSize: "25px"}}>Đăng ký tài khoản</h3>
+                </Col>
+            </Row>
+            <Row justify={"center"}>
+                <Col xs={24} md={8}>
                     <Form.Item
                         label="Username"
                         name="username"
@@ -56,7 +62,7 @@ const RegisterPage = () => {
             </Row>
 
             <Row justify={"center"}>
-                <Col xm={24} md={8}>
+                <Col xs={24} md={8}>
                     <Form.Item
                         label="Email"
                         name="email"
@@ -68,7 +74,7 @@ const RegisterPage = () => {
             </Row>
 
             <Row justify={"center"}>
-                <Col xm={24} md={8}>
+                <Col xs={24} md={8}>
                     <Form.Item
                         label="Password"
                         name="password"
@@ -80,7 +86,7 @@ const RegisterPage = () => {
             </Row>
 
             <Row justify={"center"}>
-                <Col xm={24} md={8}>
+                <Col xs={24} md={8}>
                     <Form.Item
                         label="Phone number"
                         name="phone"
@@ -97,13 +103,15 @@ const RegisterPage = () => {
             </Row>
 
             <Row justify={"center"}>
-                <Col xm={24} md={8}>
+                <Col xs={24} md={8}>
                     <div>
                         <Button
                             // onClick={() => { form.submit() }} 
                             htmlType="submit"
                             type="primary">Register</Button>
                     </div>
+                       <Divider dashed />
+                       <div>Đã có tài khoản? <Link to="/login">Đăng nhập tại đây</Link></div>
                 </Col>
             </Row>
 
