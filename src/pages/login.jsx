@@ -1,11 +1,29 @@
 import { ArrowRightOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Col, Divider, Form, Input, Row } from "antd";
-import { Link } from "react-router-dom";
+import { Button, Col, Descriptions, Divider, Form, Input, message, notification, Row } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { loginAPI } from "../services/api.service";
+import { useState } from "react";
 
 const LoginPage = () => {
 
-    const onFinish = (value) => {
-        console.log("check >>> ", value)
+    const [form] = Form.useForm();
+    const [loading, setLoading] = useState(false)
+    const navigate = useNavigate();
+
+    const onFinish = async (value) => {
+        setLoading(true);
+        const res = await loginAPI(value.email, value.password)
+        if(res.data){
+            message.success("Đăng nhập thành công")
+            navigate("/");
+        }
+        else {
+            notification.error({
+                message: "Error Login",
+                description: JSON.stringify(res.message)
+            })
+        }
+        setLoading(false);
     }
 
     return (
@@ -23,10 +41,11 @@ const LoginPage = () => {
                         name="login"
                         onFinish={onFinish}
                         style={{ margin: "30px" }}
+                        form={form}
                     >
                         
                                 <Form.Item
-                                    name="Email"
+                                    name="email"
                                     rules={[{ required: true, message: 'Please input your email!' }]}
                                 >
                                     <Input prefix={<UserOutlined />} placeholder="Email" />
@@ -34,7 +53,7 @@ const LoginPage = () => {
                             
                         
                                 <Form.Item
-                                    name="Password"
+                                    name="password"
                                     rules={[{ required: true, message: 'Please input your password!' }]}
                                 >
                                     <Input.Password prefix={<LockOutlined />} placeholder="Password" />
@@ -43,7 +62,8 @@ const LoginPage = () => {
                         
                                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                                     <Button type="primary"
-                                        htmlType="submit">Login</Button>
+                                        loading={loading}
+                                        onClick={() => form.submit()}>Login</Button>
                                     <Link to={'/'}>Go to home page <ArrowRightOutlined /></Link>
                                 </div>
                             
