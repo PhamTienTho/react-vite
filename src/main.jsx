@@ -13,16 +13,17 @@ import {
 import './style/global.css'
 import TodoApp from './components/todo/TodoApp.jsx';
 import ErrorPage from './pages/error.jsx';
+import { AuthWrapper } from './components/context/auth.context.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <ErrorPage/>, // trang error
+    errorElement: <ErrorPage />, // trang error
     children: [
       {
         index: true,
-        element: <TodoApp/>
+        element: <TodoApp />
       },
       {
         path: "/users",
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  <AuthWrapper>
     <RouterProvider router={router} />
-  </React.StrictMode>,
+  </AuthWrapper>
 )
