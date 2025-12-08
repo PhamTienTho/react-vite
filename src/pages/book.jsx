@@ -18,12 +18,11 @@ const BookPage = () => {
     },[]);
 
     return (
-            <>
-                <BookForm/>
+            <div style={{padding: "20px"}}>
                 <BookTable
                     dataBooks={dataBooks}
                 />
-            </>
+            </div>
     )
 }
 
