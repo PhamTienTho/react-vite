@@ -88,10 +88,15 @@ const fetchAllUserAPI = (current, pageSize) => {
     return axios.get(URL_BACKEND);
 }
 
+const fetchAllBookAPI = () => {
+    const URL_BACKEND = "http://localhost:8080/api/v1/book?current=1&pageSize=10";
+    return axios.get(URL_BACKEND);
+}
+
 export {
     createUserAPI, updateUserAPI,
     fetchAllUserAPI, deleteUserAPI,
     handleUploadFile, updateUserAvatarAPI,
     registerUserAPI, loginAPI, getAccountAPI,
-    logoutAPI
+    logoutAPI, fetchAllBookAPI
 }

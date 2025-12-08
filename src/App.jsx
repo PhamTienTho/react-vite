@@ -23,7 +23,6 @@ const App = () => {
 
   useEffect(() => {
     fetchUserInfo();
-    console.log("Check >>>>")
   }, []);
 
   return (
