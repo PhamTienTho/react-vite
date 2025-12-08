@@ -64,7 +64,7 @@ const LoginPage = () => {
                                     <Input.Password prefix={<LockOutlined />} placeholder="Password" 
                                         onKeyDown={(event) => {
                                             if(event.key === 'Enter'){
-                                                form.submit();
+                                                form.submit(); 
                                             }
                                         }}
                                     />

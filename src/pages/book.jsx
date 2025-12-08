@@ -1,6 +1,8 @@
+import PrivateRoute from "./private.route";
+
 const BookPage = () => {
     return (
-        <div>Book page</div>
+            <div>Book page</div>
     )
 }
 
