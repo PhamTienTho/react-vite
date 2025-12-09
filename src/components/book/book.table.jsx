@@ -1,12 +1,12 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Table } from "antd";
+import { Pagination, Table } from "antd";
 import BookForm from "./book.form";
 import { useState } from "react";
 import ViewBookDetail from "./view.book.detail";
 
 const BookTable = (props) => {
 
-    const { dataBooks, loadBooks } = props;
+    const { dataBooks, loadBooks, current, pageSize, total, setCurrent, setPageSize, setTotal } = props;
 
     const dataSource = dataBooks;
 
@@ -16,7 +16,11 @@ const BookTable = (props) => {
     const columns = [
         {
             title: 'STT',
-            dataIndex: '',
+            render: (_, record, index) => {
+                return (
+                    <>{(current - 1) * pageSize + index + 1}</>
+                )
+            }
         },
         {
             title: 'ID',
@@ -42,8 +46,8 @@ const BookTable = (props) => {
             title: 'Giá tiền',
             dataIndex: 'price',
             render: (text, record) => {
-                if(text ) return new Intl.NumberFormat('vi-VN',
-                            { style: 'currency', currency: 'VND' }).format(record.price)
+                if (text) return new Intl.NumberFormat('vi-VN',
+                    { style: 'currency', currency: 'VND' }).format(record.price)
             }
         },
         {
@@ -67,17 +71,35 @@ const BookTable = (props) => {
         },
     ];
 
-    <Table dataSource={dataSource} columns={columns} />;
+    // <Table dataSource={dataSource} columns={columns} />;
+
+    const handleOnChange = (pagination ) => {
+        if(+pagination.current !== +current){
+            setCurrent(+pagination.current)
+        }
+        if(+pagination.pageSize !== +pageSize){
+            setPageSize(+pagination.pageSize)
+        }
+    }
 
     return (
         <div>
             <BookForm
                 loadBooks={loadBooks}
             />
+
             <Table
+                onChange={handleOnChange}
+                style={{ marginBottom: "15px" }}
                 dataSource={dataSource}
                 columns={columns}
                 rowKey={'_id'}
+                pagination={{
+                    showSizeChanger: true,
+                    current: current,
+                    pageSize: pageSize,
+                    total: total,
+                }}
             />
             <ViewBookDetail
                 isBookDetailOpen={isBookDetailOpen}
