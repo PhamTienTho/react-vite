@@ -21,6 +21,7 @@ const BookPage = () => {
             <div style={{padding: "20px"}}>
                 <BookTable
                     dataBooks={dataBooks}
+                    loadBooks={loadBooks}
                 />
             </div>
     )

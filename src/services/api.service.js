@@ -89,14 +89,26 @@ const fetchAllUserAPI = (current, pageSize) => {
 }
 
 const fetchAllBookAPI = () => {
-    const URL_BACKEND = "http://localhost:8080/api/v1/book?current=1&pageSize=10";
+    const URL_BACKEND = "api/v1/book?current=1&pageSize=20";
     return axios.get(URL_BACKEND);
 }
 
+const createBookAPI = (thumbnail, mainText, author, price, quantity, category) => {
+    const URL_BACKEND = '/api/v1/book';
+    const data = {
+        thumbnail: thumbnail,
+        mainText: mainText,
+        author: author,
+        price: price,
+        quantity: quantity,
+        category: category
+    }
+    return axios.post(URL_BACKEND, data);
+}
 export {
     createUserAPI, updateUserAPI,
     fetchAllUserAPI, deleteUserAPI,
     handleUploadFile, updateUserAvatarAPI,
     registerUserAPI, loginAPI, getAccountAPI,
-    logoutAPI, fetchAllBookAPI
+    logoutAPI, fetchAllBookAPI, createBookAPI
 }

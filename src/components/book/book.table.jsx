@@ -6,7 +6,7 @@ import ViewBookDetail from "./view.book.detail";
 
 const BookTable = (props) => {
 
-    const { dataBooks } = props;
+    const { dataBooks, loadBooks } = props;
 
     const dataSource = dataBooks;
 
@@ -40,7 +40,11 @@ const BookTable = (props) => {
         },
         {
             title: 'Giá tiền',
-            dataIndex: 'price'
+            dataIndex: 'price',
+            render: (text, record) => {
+                if(text ) return new Intl.NumberFormat('vi-VN',
+                            { style: 'currency', currency: 'VND' }).format(record.price)
+            }
         },
         {
             title: 'Số lượng',
@@ -67,7 +71,9 @@ const BookTable = (props) => {
 
     return (
         <div>
-            <BookForm></BookForm>
+            <BookForm
+                loadBooks={loadBooks}
+            />
             <Table
                 dataSource={dataSource}
                 columns={columns}

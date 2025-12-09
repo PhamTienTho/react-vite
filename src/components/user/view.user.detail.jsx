@@ -38,7 +38,7 @@ const ViewUserDetail = (props) => {
         if (file) {
             setSelectedFile(file);
             setPreview(URL.createObjectURL(file));
-            event.target.value = '';
+            event.target.value = null;
         }
 
     }
@@ -49,7 +49,6 @@ const ViewUserDetail = (props) => {
         if (resUpload.data) {
             const newAvatar = resUpload.data.fileUploaded;
             // step 2: update user
-            console.log("check new avatar >>>", newAvatar)
             const resUpdateAvatar = await updateUserAvatarAPI(newAvatar, id, fullName, phone);
             if (resUpdateAvatar.data) {
                 notification.success({
@@ -63,7 +62,7 @@ const ViewUserDetail = (props) => {
             }
             else {
                 notification.error({
-                    message: "Error upload avate",
+                    message: "Error upload avatar",
                     description: JSON.stringify(resUpload.message)
                 })
             }
@@ -86,7 +85,7 @@ const ViewUserDetail = (props) => {
                 closable={{ 'aria-label': 'Close Button' }}
                 onClose={() => {
                     setIsDetailOpen(false);
-
+                    
                 }}
                 open={isDetailOpen}
             >
@@ -131,6 +130,7 @@ const ViewUserDetail = (props) => {
                                 <Button type="primary"
                                     onClick={() => handleUpdateUserAvatar()}
                                 >Save</Button>
+
                             </div>
                         </>
 
