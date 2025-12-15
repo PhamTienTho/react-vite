@@ -1,8 +1,9 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Pagination, Table } from "antd";
-import BookForm from "./book.form";
+import BookForm from "./create.book.control";
 import { useState } from "react";
 import ViewBookDetail from "./view.book.detail";
+import CreateBookModal from "./create.book.uncontrol";
 
 const BookTable = (props) => {
 
@@ -84,7 +85,11 @@ const BookTable = (props) => {
 
     return (
         <div>
-            <BookForm
+            {/* <BookForm
+                loadBooks={loadBooks}
+            /> */}
+            
+            <CreateBookModal
                 loadBooks={loadBooks}
             />
 

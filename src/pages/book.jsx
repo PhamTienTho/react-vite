@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import BookTable from "../components/book/book.table";
 import PrivateRoute from "./private.route";
 import { fetchAllBookAPI } from "../services/api.service";
-import BookForm from "../components/book/book.form";
+import BookForm from "../components/book/create.book.control";
 
 const BookPage = () => {
 
