@@ -1,10 +1,11 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Pagination, Table } from "antd";
+import { message, notification, Pagination, Popconfirm, Table } from "antd";
 import BookForm from "./create.book.control";
 import { useState } from "react";
 import ViewBookDetail from "./view.book.detail";
 import CreateBookModal from "./create.book.uncontrol";
 import UpdateBookModal from "./update.bookModal";
+import { deleteBookAPI } from "../../services/api.service";
 
 const BookTable = (props) => {
 
@@ -67,15 +68,25 @@ const BookTable = (props) => {
             render: (_, record) => {
                 return (
                     <div style={{ display: "flex", gap: "30px" }}>
-                        <EditOutlined 
+                        <EditOutlined
                             onClick={
-                               () => {
-                               setDataUpdate(record);
-                               setIsBookUpdateOpen(true);
-                            }}
+                                () => {
+                                    setDataUpdate(record);
+                                    setIsBookUpdateOpen(true);
+                                }}
                             style={{ cursor: "pointer", color: "orange" }}
                         />
-                        <DeleteOutlined />
+                        <Popconfirm
+                            title="Delete the task"
+                            description="Are you sure to delete this task?"
+                            onConfirm={() => confirmDelete(record._id)}
+                            onCancel={() => { }}
+                            okText="Yes"
+                            cancelText="No"
+                        >
+                            <DeleteOutlined style={{ cursor: "pointer", color: "red" }} />
+                        </Popconfirm>
+
                     </div>
                 )
             }
@@ -84,21 +95,35 @@ const BookTable = (props) => {
 
     // <Table dataSource={dataSource} columns={columns} />;
 
-    const handleOnChange = (pagination ) => {
-        if(+pagination.current !== +current){
+    const handleOnChange = (pagination) => {
+        if (+pagination.current !== +current) {
             setCurrent(+pagination.current)
         }
-        if(+pagination.pageSize !== +pageSize){
+        if (+pagination.pageSize !== +pageSize) {
             setPageSize(+pagination.pageSize)
         }
     }
+
+    const confirmDelete = async (id) => {
+        const res = await deleteBookAPI(id);
+        await loadBooks();
+        if (res.data) {
+            message.success("Xóa sách thành công")
+        }
+        else {
+            notification.error({
+                message: "Erroe",
+                description: "Xóa sách thất bại"
+            })
+        }
+    };
 
     return (
         <div>
             {/* <BookForm
                 loadBooks={loadBooks}
             /> */}
-            
+
             <CreateBookModal
                 loadBooks={loadBooks}
             />
