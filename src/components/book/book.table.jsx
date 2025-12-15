@@ -4,6 +4,7 @@ import BookForm from "./create.book.control";
 import { useState } from "react";
 import ViewBookDetail from "./view.book.detail";
 import CreateBookModal from "./create.book.uncontrol";
+import UpdateBookModal from "./update.bookModal";
 
 const BookTable = (props) => {
 
@@ -14,6 +15,8 @@ const BookTable = (props) => {
     const [bookDetail, setBookDetail] = useState(null);
     const [isBookDetailOpen, setIsBookDetailOpen] = useState(false);
 
+    const [isBookUpdateOpen, setIsBookUpdateOpen] = useState(false);
+    const [dataUpdate, setDataUpdate] = useState(null);
     const columns = [
         {
             title: 'STT',
@@ -64,7 +67,14 @@ const BookTable = (props) => {
             render: (_, record) => {
                 return (
                     <div style={{ display: "flex", gap: "30px" }}>
-                        <EditOutlined />
+                        <EditOutlined 
+                            onClick={
+                               () => {
+                               setDataUpdate(record);
+                               setIsBookUpdateOpen(true);
+                            }}
+                            style={{ cursor: "pointer", color: "orange" }}
+                        />
                         <DeleteOutlined />
                     </div>
                 )
@@ -110,6 +120,13 @@ const BookTable = (props) => {
                 isBookDetailOpen={isBookDetailOpen}
                 setIsBookDetailOpen={setIsBookDetailOpen}
                 bookDetail={bookDetail}
+            />
+
+            <UpdateBookModal
+                isBookUpdateOpen={isBookUpdateOpen}
+                setIsBookUpdateOpen={setIsBookUpdateOpen}
+                dataUpdate={dataUpdate}
+                loadBooks={loadBooks}
             />
         </div>
     )
